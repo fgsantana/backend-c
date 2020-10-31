@@ -3,9 +3,11 @@ package com.github.fgsantana.formula1api.service;
 import com.github.fgsantana.formula1api.client.FormulaFeignClient;
 import com.github.fgsantana.formula1api.dto.request.RaceTbl;
 import com.github.fgsantana.formula1api.dto.request.Result;
+import com.github.fgsantana.formula1api.dto.request.type.ResultDriver;
 import com.github.fgsantana.formula1api.dto.response.ResponseResult;
 import com.github.fgsantana.formula1api.dto.response.ResponseSeasonResult;
 import com.github.fgsantana.formula1api.exception.InvalidFormatException;
+import com.github.fgsantana.formula1api.exception.PositionNotInRaceException;
 import feign.FeignException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -34,6 +36,24 @@ public class FormulaService {
         } catch (FeignException.BadRequest e) {
             throw new InvalidFormatException();
         }
+    }
+
+    public ResultDriver getDriverByPosition(String season, String round, int position) {
+        try {
+            Result result = client.getRaceResult(season, round);
+            ResultDriver[] results = result.getMrData().getRaceTable().getRaces()[0].getResults();
+            return getDriver(results, position);
+        } catch (FeignException.BadRequest e) {
+            throw new InvalidFormatException();
+        }
+    }
+
+
+    private ResultDriver getDriver(ResultDriver[] results, int position) {
+        if (position > results.length || position < 1) {
+            throw new PositionNotInRaceException(position);
+        }
+        return results[position - 1];
     }
 
 

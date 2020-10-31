@@ -27,5 +27,24 @@ public class FormulaService {
         }
     }
 
+    public ResponseSeasonResult getAllRacesPage(String year, Long size, Long page) {
+        try {
+            Result result = client.getAllRacesPage(year, size, page);
+            return ResponseSeasonResult.builder().raceTable(result.getMrData().getRaceTable()).build();
+        } catch (FeignException.BadRequest e) {
+            throw new InvalidFormatException();
+        }
+    }
+
+    public ResponseSeasonResult getAllRacesDefault(String year) {
+        try{
+            Result result = client.getAllRacesDefault(year,200L);
+            return ResponseSeasonResult.builder().raceTable(result.getMrData().getRaceTable()).build();
+        }
+        catch (FeignException.BadRequest e) {
+            throw new InvalidFormatException();
+        }
+    }
+
 
 }

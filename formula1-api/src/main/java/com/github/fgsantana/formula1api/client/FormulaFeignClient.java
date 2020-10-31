@@ -9,8 +9,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(url = "https://ergast.com/api", name = "formula")
 public interface FormulaFeignClient {
 
+
     @GetMapping("/f1/{year}/{round}/results.json")
     Result getRaceResult(@PathVariable("year") String year, @PathVariable("round") String round);
 
-    
+    @GetMapping("/f1/{year}/results.json")
+    Result getAllRacesPage(@PathVariable("year") String year, @RequestParam Long limit, @RequestParam Long offset);
+
+    @GetMapping("/f1/{year}/results.json")
+    Result getAllRacesDefault(@PathVariable("year") String year, @RequestParam Long limit);
 }

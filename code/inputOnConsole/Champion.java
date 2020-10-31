@@ -14,14 +14,11 @@ public class Champion {
 
         }
 
-        int greater = 0;
+        int greater = points[0];
         for (int i = 1; i < points.length; i++) {
-            if (points[i] >= points[greater]) {
-                greater = i;
-            }
-
+           greater = points[i] > greater ? points[i] : greater;
         }
-        System.out.println(points[greater]);
+        System.out.println(greater);
 
     }
 }

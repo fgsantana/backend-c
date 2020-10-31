@@ -16,7 +16,7 @@ public class FormulaController {
     final FormulaService service;
 
     @GetMapping("/{season}/{round}")
-    public ResponseResult getRaceResult(@PathVariable("season") String season, @PathVariable("round") String round) {
+    public ResponseResult getRaceResult(@PathVariable("season") String season,@Nullable @PathVariable("round") String round,@Nullable @RequestParam("size") Long size, @Nullable @RequestParam("page") Long page) {
         return service.getRound(season, round);
     }
 

@@ -12,12 +12,10 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class ResponseResult {
-    private String season;
-    private String round;
+
 
     @JsonProperty("RaceInformation")
     private Race raceInfo;
 
-    @JsonProperty("Results")
-    private ResultDriver[] results;
+
 }

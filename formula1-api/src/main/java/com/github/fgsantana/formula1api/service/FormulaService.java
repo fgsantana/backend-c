@@ -21,7 +21,7 @@ public class FormulaService {
         try {
             Result result = client.getRaceResult(season, round);
             RaceTbl table = result.getMrData().getRaceTable();
-            return ResponseResult.builder().season(table.getSeason()).round(table.getRound()).raceInfo(table.getRaces()[0]).results(table.getRaces()[0].getResults()).build();
+            return ResponseResult.builder().raceInfo(table.getRaces()[0]).build();
         } catch (FeignException.BadRequest e) {
             throw new InvalidFormatException();
         }
@@ -32,16 +32,6 @@ public class FormulaService {
             Result result = client.getAllRacesPage(year, size, page);
             return ResponseSeasonResult.builder().raceTable(result.getMrData().getRaceTable()).build();
         } catch (FeignException.BadRequest e) {
-            throw new InvalidFormatException();
-        }
-    }
-
-    public ResponseSeasonResult getAllRacesDefault(String year) {
-        try{
-            Result result = client.getAllRacesDefault(year,200L);
-            return ResponseSeasonResult.builder().raceTable(result.getMrData().getRaceTable()).build();
-        }
-        catch (FeignException.BadRequest e) {
             throw new InvalidFormatException();
         }
     }

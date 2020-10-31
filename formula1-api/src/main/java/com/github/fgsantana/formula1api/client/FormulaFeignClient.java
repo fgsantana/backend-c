@@ -16,6 +16,5 @@ public interface FormulaFeignClient {
     @GetMapping("/f1/{year}/results.json")
     Result getAllRacesPage(@PathVariable("year") String year, @RequestParam Long limit, @RequestParam Long offset);
 
-    @GetMapping("/f1/{year}/results.json")
-    Result getAllRacesDefault(@PathVariable("year") String year, @RequestParam Long limit);
+
 }

@@ -11,6 +11,6 @@ import lombok.*;
 @Builder
 
 public class ResponseSeasonResult {
-    @JsonProperty("RaceTable")
+    @JsonProperty("Races")
     RaceTbl raceTable;
 }

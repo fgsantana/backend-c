@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(url = "https://ergast.com/api", name = "formula")
+@FeignClient(url = "http://ergast.com/api", name = "formula")
 public interface FormulaFeignClient {
 
 
